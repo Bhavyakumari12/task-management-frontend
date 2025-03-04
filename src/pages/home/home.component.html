@@ -12,13 +12,13 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *ngFor="let item of data.backlog;">
-        <app-task-item
-          (updatedTask)="saveTask(item)"
-          (deletedTask)="deleteTask(item)"
-          [taskItem]="item"
-        ></app-task-item>
-      </ng-container>
+      @for (task of data.backlog; track task ; let i = $index){
+      <app-task-item
+        (updatedTask)="saveTask(task)"
+        (deletedTask)="deleteTask(task, i, 'to-do')"
+        [taskItem]="task"
+      />
+      }
       <div (click)="addBacklog()" style="cursor: pointer" class="add-task">
         <mat-icon>add</mat-icon>
       </div>
@@ -26,7 +26,7 @@
   </div>
   <div class="status">
     <div class="title">
-      <h2> Progress</h2>
+      <h2>Progress</h2>
     </div>
     <div
       cdkDropList
@@ -37,13 +37,13 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *ngFor="let item of data.inProgress;">
-        <app-task-item
-          (updatedTask)="saveTask(item)"
-          (deletedTask)="deleteTask(item)"
-          [taskItem]="item"
-        ></app-task-item>
-      </ng-container>
+      @for (task of data.inProgress; track task ; let i = $index){
+      <app-task-item
+        (updatedTask)="saveTask(task)"
+        (deletedTask)="deleteTask(task, i, 'in-progress')"
+        [taskItem]="task"
+      />
+      }
     </div>
   </div>
   <div class="status">
@@ -59,13 +59,13 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *ngFor="let item of data.completed;">
-        <app-task-item
-          (updatedTask)="saveTask(item)"
-          (deletedTask)="deleteTask(item)"
-          [taskItem]="item"
-        ></app-task-item>
-      </ng-container>
+      @for (task of data.completed; track task ; let i = $index){
+      <app-task-item
+        (updatedTask)="saveTask(task)"
+        (deletedTask)="deleteTask(task, i, 'done')"
+        [taskItem]="task"
+      />
+      }
     </div>
   </div>
 </div>

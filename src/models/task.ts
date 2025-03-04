@@ -24,3 +24,5 @@ export enum TaskStatus {
   InProgress = 'in-progress',
   Done = 'done',
 }
+
+export type TaskStatusType = 'to-do' | 'in-progress' | 'done';

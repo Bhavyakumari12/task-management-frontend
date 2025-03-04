@@ -5,15 +5,14 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Task, TaskData, TaskStatus } from '../../models/task';
+import { Task, TaskData, TaskStatus, TaskStatusType } from '../../models/task';
 import { MatIcon } from '@angular/material/icon';
 import { TaskItemComponent } from '../task-item/task-item.component';
 import { TaskService } from '../../services/task.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [CdkDropList, TaskItemComponent, MatIcon, CommonModule],
+  imports: [CdkDropList, TaskItemComponent, MatIcon],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -79,7 +78,7 @@ export class HomeComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
       this.addBacklog();
       event.preventDefault();
     }
@@ -113,7 +112,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  deleteTask(item: Task) {
+  deleteTask(item: Task, index: number, status: TaskStatusType) {
     this.taskService.deleteTask(item._id!).subscribe(() => {
       this.data.backlog = this.data.backlog.filter((i) => i._id !== item._id);
       this.data.inProgress = this.data.inProgress.filter(
