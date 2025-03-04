@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="status">
+    <div class="title">
+      <h2>To Do</h2>
+    </div>
+    <div
+      cdkDropList
+      #backlogList="cdkDropList"
+      id="backlogList"
+      [cdkDropListConnectedTo]="['todoList', 'doneList']"
+      [cdkDropListData]="data.backlog"
+      class="tasks"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <ng-container *for="let item of data.backlog; trackBy: trackById">
+        <app-task-item
+          (updatedTask)="saveTask(item)"
+          (deletedTask)="deleteTask(item)"
+          [taskItem]="item"
+        ></app-task-item>
+      </ng-container>
+      <div (click)="addBacklog()" style="cursor: pointer" class="add-task">
+        <mat-icon>add</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="status">
+    <div class="title">
+      <h2> Progress</h2>
+    </div>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      id="todoList"
+      [cdkDropListConnectedTo]="['doneList', 'backlogList']"
+      [cdkDropListData]="data.inProgress"
+      class="tasks"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <ng-container *for="let item of data.inProgress; trackBy: trackById">
+        <app-task-item
+          (updatedTask)="saveTask(item)"
+          (deletedTask)="deleteTask(item)"
+          [taskItem]="item"
+        ></app-task-item>
+      </ng-container>
+    </div>
+  </div>
+  <div class="status">
+    <div class="title">
+      <h2>Done</h2>
+    </div>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      id="doneList"
+      [cdkDropListConnectedTo]="['todoList', 'backlogList']"
+      [cdkDropListData]="data.completed"
+      class="tasks"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <ng-container *for="let item of data.completed; trackBy: trackById">
+        <app-task-item
+          (updatedTask)="saveTask(item)"
+          (deletedTask)="deleteTask(item)"
+          [taskItem]="item"
+        ></app-task-item>
+      </ng-container>
+    </div>
+  </div>
+</div>

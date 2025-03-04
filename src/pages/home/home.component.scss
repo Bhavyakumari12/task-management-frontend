@@ -1,0 +1,91 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-height: 90vh;
+    gap: 5px;
+  
+  }
+  
+  .status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 90vh;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px 0 rgba(60, 64, 67, 0.3);
+  }
+  
+  
+  .tasks {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 5px;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    height: 90vh;
+  
+    .cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  
+  .title {
+    padding: 5px;
+    width: 100%;
+  }
+  
+  
+  .add-task {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+    align-items: center;
+    background: rgba(204, 204, 204, 0.4);
+    font-size: 14px;
+    //box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3);
+    transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer !important;
+    border: 2px dashed #ccc;
+  }
+  
+  .delete-area, .delete-area.cdk-drop-list-dragging {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  
+    .cdk-drag-placeholder {
+      display: none;
+    }
+  }
+  
+  .delete-area .show {
+    opacity: 0;
+  }
+  
+  .delete-area .hide {
+    opacity: 1;
+  }
+  
+  
+  .delete-button {
+    box-shadow: 0 0 100px 50px #666565;
+  }
