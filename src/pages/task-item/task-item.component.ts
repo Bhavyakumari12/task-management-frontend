@@ -5,11 +5,19 @@ import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { Task } from '../../models/task';
 import { TaskService } from '../../services/task.service';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
-  imports: [MatTooltip, MatIcon, CdkDrag, CdkDragHandle, MatIconModule],
+  imports: [
+    MatTooltip,
+    MatIcon,
+    CdkDrag,
+    CdkDragHandle,
+    MatIconModule,
+    CommonModule,
+  ],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.scss',
 })

@@ -1,4 +1,11 @@
+export interface TaskResponse {
+  page: number;
+  pages: number;
+  tasks: Task[];
+  total: number;
+}
 export interface Task {
+  _id?: string;
   title: string;
   description: string;
   status: TaskStatus;

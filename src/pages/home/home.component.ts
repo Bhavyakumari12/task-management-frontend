@@ -9,10 +9,11 @@ import { Task, TaskData, TaskStatus } from '../../models/task';
 import { MatIcon } from '@angular/material/icon';
 import { TaskItemComponent } from '../task-item/task-item.component';
 import { TaskService } from '../../services/task.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [CdkDropList, TaskItemComponent, MatIcon],
+  imports: [CdkDropList, TaskItemComponent, MatIcon, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -26,7 +27,8 @@ export class HomeComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe((tasks) => {
+    this.taskService.getTasks().subscribe(({ tasks }) => {
+      console.log(tasks);
       this.data.backlog = tasks.filter(
         (task) => task.status === TaskStatus.ToDo
       );
@@ -90,27 +92,34 @@ export class HomeComponent implements OnInit {
       status: TaskStatus.ToDo,
       editing: true,
     };
-    this.taskService.createTask(newTask).subscribe((task) => {
-      this.data.backlog.push(task);
-    });
+    this.data.backlog.push(newTask);
   }
 
   saveTask(task: Task) {
-    this.taskService.updateTask(task.id!, task).subscribe((updatedTask) => {
-      const index = this.data.backlog.findIndex((t) => t.id === task.id);
-      if (index !== -1) {
-        this.data.backlog[index] = updatedTask;
-      }
-    });
+    if (task._id) {
+      this.taskService.updateTask(task._id, task).subscribe((updatedTask) => {
+        const index = this.data.backlog.findIndex((t) => t._id === task._id);
+        if (index !== -1) {
+          this.data.backlog[index] = updatedTask;
+        }
+      });
+    } else {
+      this.taskService.createTask(task).subscribe((createdTask) => {
+        const index = this.data.backlog.findIndex((t) => t === task);
+        if (index !== -1) {
+          this.data.backlog[index] = createdTask;
+        }
+      });
+    }
   }
 
   deleteTask(item: Task) {
-    this.taskService.deleteTask(item.id!).subscribe(() => {
-      this.data.backlog = this.data.backlog.filter((i) => i.id !== item.id);
+    this.taskService.deleteTask(item._id!).subscribe(() => {
+      this.data.backlog = this.data.backlog.filter((i) => i._id !== item._id);
       this.data.inProgress = this.data.inProgress.filter(
-        (i) => i.id !== item.id
+        (i) => i._id !== item._id
       );
-      this.data.completed = this.data.completed.filter((i) => i.id !== item.id);
+      this.data.completed = this.data.completed.filter((i) => i._id !== item._id);
     });
   }
 }

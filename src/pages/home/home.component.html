@@ -12,7 +12,7 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *for="let item of data.backlog; trackBy: trackById">
+      <ng-container *ngFor="let item of data.backlog;">
         <app-task-item
           (updatedTask)="saveTask(item)"
           (deletedTask)="deleteTask(item)"
@@ -37,7 +37,7 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *for="let item of data.inProgress; trackBy: trackById">
+      <ng-container *ngFor="let item of data.inProgress;">
         <app-task-item
           (updatedTask)="saveTask(item)"
           (deletedTask)="deleteTask(item)"
@@ -59,7 +59,7 @@
       class="tasks"
       (cdkDropListDropped)="drop($event)"
     >
-      <ng-container *for="let item of data.completed; trackBy: trackById">
+      <ng-container *ngFor="let item of data.completed;">
         <app-task-item
           (updatedTask)="saveTask(item)"
           (deletedTask)="deleteTask(item)"

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Task } from '../models/task';
+import { Task, TaskResponse } from '../models/task';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private apiUrl = 'http://192.168.0.15:3000/api/tasks'; 
+  private apiUrl = 'http://localhost:3000/api/tasks'; 
 
   constructor(private http: HttpClient) {}
 
@@ -16,8 +16,8 @@ export class TaskService {
     return this.http.post<Task>(this.apiUrl, task);
   }
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+  getTasks(): Observable<TaskResponse> {
+    return this.http.get<TaskResponse>(this.apiUrl);
   }
 
   getTaskById(taskId: string): Observable<Task> {
