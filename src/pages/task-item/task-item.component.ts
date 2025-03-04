@@ -37,6 +37,10 @@ export class TaskItemComponent {
     item.editing = true;
   }
 
+  cancelEdit(item: Task) {
+    item.editing = false;
+  }
+
   deleteTask(task: Task) {
     this.deletedTask.emit(task);
   }

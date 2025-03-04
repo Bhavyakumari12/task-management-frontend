@@ -18,6 +18,11 @@
     (blur)="editOff($event, task)"
     ngAutoFocus
   />
+  <mat-icon
+    (click)="cancelEdit(task)"
+    class="pointer font-medium color-orange flex-center"
+    fontIcon="close"
+  />
   } @else {
   <span class="task-text">{{ task.title }}</span>
   }
@@ -26,7 +31,6 @@
       (click)="deleteTask(task)"
       class="pointer font-medium color-red flex-center"
       fontIcon="delete"
-      >
-    </mat-icon>
+    />
   </div>
 </div>
